@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Pooja 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;}
+
+body{
+margin:0;
+height:100vh;
+font-family:'Poppins',sans-serif;
+background:radial-gradient(circle at top,#0f2027,#203a43,#2c5364);
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+color:white;
+}
+
+/* stars */
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+opacity:.7;
+animation:moveStar linear infinite;
+}
+
+@keyframes moveStar{
+from{transform:translateY(100vh);}
+to{transform:translateY(-100vh);}
+}
+
+/* screens */
+.screen{
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+transition:1s;
+}
+
+#screen2{
+opacity:0;
+pointer-events:none;
+}
+
+/* card */
+.card{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(15px);
+padding:30px;
+border-radius:25px;
+text-align:center;
+width:90%;
+max-width:380px;
+box-shadow:0 0 50px rgba(255,255,255,.2);
+}
+
+img{
+width:160px;
+border-radius:20px;
+margin-bottom:15px;
+box-shadow:0 0 25px rgba(255,255,255,.4);
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+50%{transform:translateY(-10px);}
+}
+
+h1{text-shadow:0 0 15px pink;}
+
+.typing{
+font-size:15px;
+min-height:55px;
+opacity:.9;
+}
+
+.buttons{
+margin-top:25px;
+display:flex;
+justify-content:space-between;
+gap:60px;
+}
+
+button{
+flex:1;
+padding:14px;
+border:none;
+border-radius:30px;
+font-size:16px;
+cursor:pointer;
+transition:.4s;
+}
+
+#yes{
+background:#ff4da6;
+color:white;
+box-shadow:0 0 20px #ff4da6;
+}
+
+#no{
+background:#444;
+color:white;
+}
+
+/* hearts */
+.heart{
+position:absolute;
+font-size:20px;
+animation:rise 6s linear;
+opacity:.7;
+pointer-events:none;
+}
+
+@keyframes rise{
+from{transform:translateY(0);opacity:0;}
+30%{opacity:1;}
+to{transform:translateY(-800px);opacity:0;}
+}
+
+/* knew itt text */
+.knew{
+font-size:26px;
+margin-top:15px;
+color:#ff9ad5;
+text-shadow:0 0 15px pink;
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6b0b40e0b6.mp3">
+</audio>
+
+<!-- SCREEN 1 -->
+<div class="screen" id="screen1">
+
+<div class="card">
+
+<img src="dog.jpg">
+
+<h1>Pooja 💗</h1>
+
+<div class="typing" id="typing"></div>
+
+<h2>will you be mine ? 🥹</h2>
+
+<div class="buttons">
+<button id="yes" onclick="yesClick()">Yes 💖</button>
+<button id="no" onmouseover="noMove()" ontouchstart="noMove()">No 😭</button>
+</div>
+
+</div>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen" id="screen2">
+
+<div class="card">
+
+<img src="cat.jpg">
+
+<div class="knew">lol knew it.... 😌💗</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* typing */
+const text="Somewhere between the jokes and the random talks… you became important to me.";
+let i=0;
+function type(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
+setTimeout(type,40);
+}}
+type();
+
+/* stars */
+for(let i=0;i<120;i++){
+let s=document.createElement("div");
+s.className="star";
+s.style.left=Math.random()*100+"vw";
+s.style.animationDuration=(5+Math.random()*6)+"s";
+document.body.appendChild(s);
+}
+
+/* hearts */
+setInterval(()=>{
+let h=document.createElement("div");
+h.innerHTML="💗";
+h.className="heart";
+h.style.left=Math.random()*window.innerWidth+"px";
+h.style.bottom="0";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},500);
+
+/* NO button */
+let scale=1;
+function noMove(){
+let btn=document.getElementById("no");
+let x=Math.random()*200-100;
+let y=Math.random()*80-40;
+scale-=.1;
+if(scale<.3) scale=.3;
+btn.style.transform=`translate(${x}px,${y}px) scale(${scale})`;
+}
+
+/* YES -> second screen */
+function yesClick(){
+document.getElementById("screen1").style.opacity=0;
+setTimeout(()=>{
+document.getElementById("screen1").style.display="none";
+document.getElementById("screen2").style.opacity=1;
+document.getElementById("screen2").style.pointerEvents="auto";
+},800);
+}
+
+</script>
+
+</body>
+</html>
